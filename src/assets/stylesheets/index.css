@@ -1,0 +1,110 @@
+html, body {
+  background-color: #254b4c;
+  /* padding: 20px; */
+  margin: 0;
+  width: 100%;
+  /* height: 100%; */
+}
+h1, h2, p, ul, li {
+  font-family: sans-serif;
+}
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header {
+  background-color: #111;
+  padding: 0;
+  margin: 1vw 0;
+}
+ul.header li a {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px;
+  display: inline-block;
+}
+.content {
+  background-color: #FFF;
+  width: 100%;
+  /* margin: 0 auto; */
+  height: 80vh;
+  overflow: auto;
+
+}
+.content h2 {
+  padding: 0;
+  margin: 0;
+}
+.content li {
+  margin-bottom: 10px;
+}
+.active {
+  background-color: #0099FF;
+}
+
+/*  recipes cards css*/
+.recipes_list {
+  /* padding: 1vw; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.card_recipe {
+  width: 30vw;
+  /* margin-right: 10px;
+  margin-bottom: 10px; */
+  margin: 1vw;
+  /* margin-left: 0; */
+	height: 30vw;
+	text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	position: relative;
+  border-radius: 0.5em;
+  border: 0.1em solid black;
+}
+
+.card_recipe_img{
+  position: relative;
+  width: 100%;
+  height: 70%;
+	background-size: cover !important;
+	background-position: center;
+  border-radius: 0.5em 0.5em 0 0;
+}
+
+.card_recipe_infos{
+  width: 100%;
+  height: 30%;
+}
+
+.card_description {
+position: absolute;
+bottom: 10px;
+left: 10px;
+}
+.card_description h2 {
+font-size: 20px;
+}
+.card_description p {
+font-size: 14px;
+opacity: 0.7;
+font-weight: lighter;
+}
+.card_link {
+position: absolute;
+top: 0;
+bottom: 0;
+right: 0;
+width: 100%;
+z-index: 2;
+background: black;
+opacity: 0;
+border-radius: 0.5em;
+}
+.card_recipe:hover {
+  box-shadow: 0.2vw 0.2vw 0.3vw red;
+}
