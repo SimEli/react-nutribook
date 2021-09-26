@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Recipe from './recipe.jsx';
+import RecipeModal from "./recipe_modal";
+
 
 const RecipesList = (props) => {
 	const renderList = () => {
@@ -7,10 +9,13 @@ const RecipesList = (props) => {
 			return (
 				<Recipe 
 					recipe={recipe}
-					key={recipe.lat}
-					selected={recipe.name === props.selectedRecipe.name}
+					key={recipe.recipeName}
+					selected={recipe.recipeName === props.selectedRecipe.recipeName}
 					index={index}
-					selectRecipe={props.selectRecipe}
+					showSelectedRecipe={props.showSelectedRecipe} 
+					openModal={props.openModal}
+					closeModal={props.closeModal}
+					deleteRecipe ={props.deleteRecipe}
 				/>
 			);
 		});
@@ -19,6 +24,12 @@ const RecipesList = (props) => {
 	return(
 		<div className="recipes_list">
 			{renderList()}
+			<RecipeModal 
+				show={props.show}
+				showSelectedRecipe={props.showSelectedRecipe} 
+				closeModal={props.closeModal}
+				selected={props.selectedRecipe}
+			/>
 		</div>
 	);
 };

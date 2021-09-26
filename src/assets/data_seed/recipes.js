@@ -1,51 +1,39 @@
 const recipes = [
 	{
-	  name: "Charm at the Steps of the Sacre Coeur/Montmartre",
-	  imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat1.jpg",
-	  price: 164,
-	  priceCurrency: "EUR",
-	  lat: 48.884211,
-	  lng: 2.34689
+	  recipeName: "Chicken Tikka Massala",
+	  recipeSteps: "",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1632674064/spag_bolo_bdvp8s.jpg",
+	  recipeIngredients: "",
 	},
 	{
-	  name: "Trendy Apt in Buttes Montmartre",
-	  imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat2.jpg",
-	  price: 200,
-	  priceCurrency: "EUR",
-	  lat: 48.885707,
-	  lng: 2.343543
+	  recipeName: "Trendy Apt in Buttes Montmartre",
+	  recipeSteps: "",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1632674064/poulet_tikka_wixyry.jpg",
+	  recipeIngredients: "",
 	},
 	{
-	  name: "Super 60m2 in trendy neighborhood!",
-	  imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat3.jpg",
-	  price: 150,
-	  priceCurrency: "EUR",
-	  lat: 48.885312,
-	  lng: 2.341225
+	  recipeName: "Super 60m2 in trendy neighborhood!",
+	  recipeSteps: "",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1632674063/cr%C3%A8pes_ego4oa.jpg",
+	  recipeIngredients: "",
 	},
 	{
-	  name: "Splendide terrasse vue imprenable",
-	  imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat4.jpg",
-	  price: 115,
-	  priceCurrency: "EUR",
-	  lat: 48.88184,
-	  lng: 2.343371
+	  recipeName: "Splendide terrasse vue imprenable",
+	  recipeSteps: "",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1632674063/gateau_amande_uuvksa.jpg",
+	  recipeIngredients: "",
 	},
 	{
-	  name: "Superbe vue à 2 min du Sacré Coeur",
-	  imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat5.jpg",
-	  price: 135,
-	  priceCurrency: "EUR",
-	  lat: 48.888839,
-	  lng: 2.339208
+	  recipeName: "Superbe vue à 2 min du Sacré Coeur",
+	  recipeSteps: "",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1632674247/7940012_haedro.jpg",
+	  recipeIngredients: "",
 	},
 	{
-	  name: "Bohemian and Chic in Paris",
-	  imageUrl: "https://raw.githubusercontent.com/lewagon/flats-boilerplate/master/images/flat6.jpg",
-	  price: 90,
-	  priceCurrency: "EUR",
-	  lat: 48.827855,
-	  lng: 2.350774
+	  recipeName: "Bohemian and Chic in Paris",
+	  recipeSteps: "",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1632674181/800-1_j1kf4c.jpg",
+	  recipeIngredients: "",
 	}
   ];
   

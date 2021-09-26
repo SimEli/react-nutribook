@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
- 
+import { withRouter } from "react-router-dom";
+import UploadPicture from './upload_picture';
+import Alert from 'react-bootstrap/Alert';
 class AddRecipeForm extends Component{
 	constructor(props) {
     super(props);
     this.state = {
       recipeName: '',
 			recipeSteps: '',
-			recipeImage: '',
+			recipeUrlImage: '',
 			recipeIngredients: ''
     };
   }
@@ -17,31 +19,41 @@ class AddRecipeForm extends Component{
 			[event.target.name]: value});
   }
 
-  handleSubmit = (event) => {
-    const { recipeName, recipeSteps, recipeImage, recipeIngredients } = this.state
-		event.preventDefault();
-		// alert(`
-    //   New Recipe Added Successfully\n
-    //   Recipe Name: ${recipeName}
-    //   Steps: ${recipeSteps}
-		// 	Image: ${recipeImage}
-		// 	Ingredients: ${recipeIngredients}
-    // `)
-		// console.log(localStorage.length);
+	setImageUrl = (data) => {
+		this.setState({
+			recipeUrlImage: data
+		});
+	}
 
-		let recipeId = (localStorage.length)+1;
-		console.log(recipeId);
-		let newRecipe = {"recipeName":recipeName, "recipeSteps":recipeSteps, "recipeImage":recipeImage, "recipeIngredients":recipeIngredients};
-		localStorage.setItem('recipe_id_'+`${recipeId}`,JSON.stringify(newRecipe));
-
-		this.setState = { //no reset to blank
-      recipeName: '',
-			recipeSteps: '',
-			recipeImage: '',
-			recipeIngredients: ''
-    };
+  handleSubmit = (event,props) => {
+		debugger
+		if (event.target[0].value === "") {
+		// 	return(<Alert variant="success">
+		// 	<Alert.Heading>Hey, nice to see you</Alert.Heading>
+		// 	<p>
+		// 		Aww yeah, you successfully read this important alert message. This example
+		// 		text is going to run a bit longer so that you can see how spacing within an
+		// 		alert works with this kind of content.
+		// 	</p>
+		// 	<hr />
+		// 	<p className="mb-0">
+		// 		Whenever you need to, be sure to use margin utilities to keep things nice
+		// 		and tidy.
+		// 	</p>
+		// </Alert>)
+		} else {
+			const { recipeName, recipeSteps, recipeUrlImage, recipeIngredients } = this.state
+			event.preventDefault(); //! ADD VALIDATION to form on NAME 
+			let storedRecipes = JSON.parse(localStorage.getItem('recipes'));
+			// let recipeId = storedRecipes.length+1;
+			let newRecipe = {"recipeName":recipeName, "recipeSteps":recipeSteps, "recipeUrlImage":recipeUrlImage, "recipeIngredients":recipeIngredients};
+			let updatedRecipes = storedRecipes.concat(newRecipe);
+			// localStorage.clear()
+			localStorage.setItem('recipes',JSON.stringify(updatedRecipes));
+			this.props.history.push('/recipes');
+		}
   }
-	
+
   render() {
     return (
 			<div className="container">
@@ -55,6 +67,7 @@ class AddRecipeForm extends Component{
 								name="recipeName"
 								value={this.state.recipeName}
 								onChange={this.handleChange}
+								placeholder="Enter the name of your recipe"
 							/>
 					</div>
 					<div className="form-group">
@@ -65,33 +78,34 @@ class AddRecipeForm extends Component{
 								name="recipeSteps"
 								value={this.state.recipeSteps}
 								onChange={this.handleChange}
+								placeholder="Enter the steps of your recipe"
 							/>
 					</div>
 					<div className="form-group">
-						<label>Recipe Ingredients <p>Please enter barcode then quantity in grams then name of ingredient. One ingredient by line</p></label>
+						<label>Recipe Ingredients</label>
 							<textarea
 								rows="6"
 								className="form-control"
 								name="recipeIngredients"
 								value={this.state.recipeIngredients}
 								onChange={this.handleChange}
+								placeholder={'Please enter barcode then quantity in grams then name of ingredient.\nOne ingredient by line\n3045320104127 250 gr farfalle\n5256879809864 350 gr tomato sauce'}
 							/>
 					</div>
 					<div className="form-group">
-					<label>Add a picture of the recipe</label>
-						<input
-							className="form-control-file"
-							type="file"
-							name="recipeImage"
-							value={this.state.recipeImage}
-							onChange={this.handleChange}
-						/>
+						<label>Add a picture of the recipe</label>
+							<UploadPicture
+								recipeUrlImage={this.state.recipeUrlImage}
+								setImageUrl={this.setImageUrl}
+								 /> 
 					</div>
+						
 							<button type="submit" className="btn btn-primary btn-block" value="">Add</button>
+						
 				</form>
 			</div>
     );
   }
 }
 
-export default AddRecipeForm;
+export default withRouter(AddRecipeForm);
