@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 
 const UploadPicture = (props) => {
 	const [image, setImage] = useState('');
-	// const [url, setUrl] = useState("");
 	const uploadImage = () => {
 		const data = new FormData()
 		const setUrl = (data) => {
@@ -31,13 +30,11 @@ const UploadPicture = (props) => {
 						accept="image/*"
 						type="file"
 						name="recipeUrlImage"
-						// value={props.recipeUrlImage} //! need to check what passes here to storage
 						onChange={(e) => setImage(e.target.files[0])}>
 					</input>
 					<Button onClick={uploadImage}>Upload</Button>
 				</div>
 				<div>
-					{/* <h1>Uploaded image will be displayed here</h1> */}
 					<img src={props.recipeUrlImage} alt="uploaded illustration of the recipe" />
 				</div>
 			</div>

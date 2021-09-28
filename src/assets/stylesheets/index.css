@@ -1,31 +1,32 @@
-html, body {
-  background-color: #F4F4F4;
-  /* padding: 20px; */
+@import url('./nutrifacts_table.css');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500&display=swap');
+
+body {
   margin: 0;
   width: 100%;
-  /* height: 100%; */
+  line-height: 1.5;
+  font-family: "Raleway", "sans-serif";
+  font-size: 1rem;
+  font-weight: 400;
+  background-color: #F4F4F4;
 }
-h1, h2, p, ul, li {
-  font-family: sans-serif;
-}
-ul.header li {
-  display: inline;
+
+ul.header{
+  display: flex;
+  justify-content: space-evenly;
+  vertical-align: middle;
   list-style-type: none;
-  margin: 0 2vw 0 3vw;
-  color: #FFF;
-}
-ul.header {
   background-color: #FFF;
   padding: 0;
-  margin: 1vw 0;
+  height: 4vw;
+  line-height: 4vw;
 }
+
 ul.header li a {
   color: rgb(94, 78, 78);
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 1.25rem;
   text-decoration: none;
-  padding: 20px;
-  display: inline-block;
+  padding: 1vw;
   margin: 0 4vw;
 }
 .content {
@@ -54,30 +55,32 @@ ul.header li a {
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-around;
   background-color: #F4F4F4;
 }
 
-.card_recipe {
-  width: 30vw;
-  /* margin-right: 10px;
-  margin-bottom: 10px; */
+.card{
+  width: 23vw;
+	height: 28vw;
+  padding: 1vw;
   margin: 1vw;
-  /* margin-left: 0; */
-	height: 30vw;
-	text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-	position: relative;
-  border-radius: 0.5em;
-  border: 0.1em solid black;
+  cursor: pointer;
+  background: white;
+  border-radius: 0.3vw;
+  box-shadow: 0 0 0.5vw rgb(0 0 0 / 20%);
 }
 
-.card_recipe_img{
-  position: relative;
+.card img{
   width: 100%;
-  height: 70%;
-	background-size: cover !important;
-	background-position: center;
-  border-radius: 0.5em 0.5em 0 0;
+  height: 23vw;
+  object-fit: fill;
+  border-radius: 0.3vw;
+}
+
+.card-text{
+  padding: 16px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .delete_recipe{
@@ -98,39 +101,10 @@ ul.header li a {
   margin: 0.4vw auto;
 }
 
-.card_recipe_infos{
-  width: 100%;
-  height: 30%;
-}
+.card:hover,
+.delete_recipe:hover{
+  box-shadow: 0.2vw 0.4vw 0.5vw rgb(0 0 0 / 20%);
 
-.card_description {
-position: absolute;
-bottom: 10px;
-left: 10px;
-}
-.card_description h2 {
-font-size: 20px;
-}
-/* .card_description p {
-font-size: 14px;
-opacity: 0.7;
-font-weight: lighter;
-} */
-/* .card_link {
-position: absolute;
-top: 0;
-bottom: 0;
-right: 0;
-width: 100%;
-z-index: 2;
-background: black;
-opacity: 0;
-border-radius: 0.5em;
-} */
-.card_recipe:hover,
-.delete_recipe:hover,
-ul.header li a:hover {
-  box-shadow: 0.1vw 0.1vw 0.1vw 0.1vw red;
 }
 
 .delete_recipe:hover{
@@ -150,8 +124,16 @@ ul.header li a:hover {
 
 @media (min-width: 576px){
   .modal-dialog {
-    max-width: 80vw;
+    max-width: 85vw;
   }
+}
+
+.modal-header{
+  padding: 0.5rem 1rem;
+}
+
+.modal-header .close{
+  font-size: 2rem;
 }
 
 .modal-content {
@@ -159,20 +141,49 @@ ul.header li a:hover {
 }
 
 .details-box{
+  position: absolute;
+  bottom: 4%;
+  left: 2%;
   width: 30%;
-  height: 25%;
-  margin: 1% 2%;
+  height: 45%;
   padding-right: 1vw;
   padding-left: 1vw;
-  /* margin-left: 2%; */
-  overflow-y: scroll;
-  border: gray solid 0.2vw;
+  padding: 0.5rem;
+  overflow: auto;
+  box-sizing: border-box;
+  background-color: rgb(0 0 0 / 10%);
+  border: rgb(0 0 0 / 20%) solid 0.2vw;
+  box-shadow: inset 0.2vw 0.4vw 0.5vw rgb(0 0 0 / 20%);
+
+}
+
+.details-box.ingredients{
+  left: 38.5%;
+}
+
+.ingredients-details,
+.steps-details{
+  white-space: pre-wrap;
 }
 
 .image-box{
   position: absolute;
-  top: 2%;
+  top: 4%;
+  left: 2%;
+  width: 30%;
+  height: 43%;
+}
+
+.card_recipe_img{
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.nutrifacts-box{
+  position: absolute;
+  top: 4%;
   right: 2%;
-  width: 50%;
-  height: 50%;
+  height: 92%;
 }
