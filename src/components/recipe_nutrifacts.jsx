@@ -2,42 +2,83 @@ import React, { Component } from 'react';
 
 
 class NutriFacts extends Component {
-	
-	fetchNutriFacts = (barcode,nutrimentsOfAllIngredients,quantity) => {
+
+	inputNutriFacts = (nutrimentsKeys,total) => {
+		// for (let i = 0; i < nutrimentsKeys.length; i++) {
+			console.log('X',total['carbohydrates']);
+		this.setState({
+			// nutrimentsKeys[i]: total[nutrimentsKeys[i]]
+			carbohydrates: 2,
+			carbohydrates_percent: 0,
+			energyKcal: 0,
+			fat: 0,
+			fat_percent: 0,
+			proteins: 2,
+			proteins_percent: 0,
+			sodium: 0,
+			sodium_percent: 0,
+			saturatedFat: 0,
+			saturatedFat_percent: 0,
+			sugars: 0,
+			sugars_percent: 0,
+			fiber: 0,
+			fiber_percent: 0
+		});
+		// }
+	}
+
+	sumUpNutriments = (nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
+		const total = {};
+		nutrimentsOfAllIngredients.forEach(ingredient => { 
+			for (let [key, value] of Object.entries(ingredient)) {
+				if (total[key]) {
+					total[key] += value;
+				} else {
+					total[key] = value;
+				}
+			}
+		});
+
+		console.log('total',total);
+		//calculate for all nutriments needed divided by total weight recipe * 100g too render nutrifacts per 100gr of the recipe
+		for (let i=0; i < nutrimentsKeys.length; i++) { 
+			total[nutrimentsKeys[i]]=(total[nutrimentsKeys[i]]/totalWeightrecipe)*100;
+		}
+		this.inputNutriFacts(nutrimentsKeys,total);
+		
+		return total;
+	};
+	 
+	fetchNutriFacts = (barcode,quantity,nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
 		fetch(`https://be-fr.openfoodfacts.org/api/v0/product/${barcode}.json?fields=nutriments`, {
 			method: "get"
 		})
 			.then(resp => resp.json())
 			.then(data => {
 			let nutriments = data.product.nutriments;
-			console.log(nutriments);
-			for (let key in nutriments) {
-				nutriments[key]=(nutriments[key]/100)*quantity; //! not sure ...
-			}
-			// /100 * quantity
-			// nutrimentsOfAllIngredients.push(nutriments);
-			// console.log(nutrimentsOfAllIngredients);
-			nutrimentsOfAllIngredients.push(nutriments);
-		})
-		.catch(err => console.log(err))
-		return nutrimentsOfAllIngredients;
-
-	}
- 
+			for (let i=0; i < nutrimentsKeys.length; i++) { 
+				nutriments[nutrimentsKeys[i]]=(nutriments[nutrimentsKeys[i]]/100)*quantity;
+		 	}
+		  nutrimentsOfAllIngredients.push(nutriments);
+			this.sumUpNutriments(nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
+			})
+			.catch(err => console.log(err))
+	};
 	componentDidMount(){
-		const currentRecipe = this.props.selectedRecipe.ingredientsArray;// recuperer storage parse
-		// console.log(currentRecipe);
-		const nutrimentsOfAllIngredients=[];
-
-		debugger
+		const currentRecipe = this.props.selectedRecipe.ingredientsArray;
+		console.log(currentRecipe);
+		let totalWeightrecipe = 0;
+		var nutrimentsOfAllIngredients = [];
+		var nutrimentsKeys = ["carbohydrates","energy","energy-kcal","fat","proteins","sodium","saturated-fat","sugars","fiber"];
 		for (let i = 0; i < currentRecipe.length; i++) {
 			let barcode = currentRecipe[i].barcode;
 			if (barcode.length === 13 && !isNaN(barcode)) { //!only take ingredients with barcode. No barcode = no nutrifacts -_-
 				barcode = parseInt(barcode);
-				const quantity = currentRecipe[i].quantity;
-				this.fetchNutriFacts(barcode,nutrimentsOfAllIngredients,quantity)
-				console.log(nutrimentsOfAllIngredients);
-				console.log(quantity);
+				const quantity = parseInt(currentRecipe[i].quantity);
+				if (!isNaN(quantity)){
+					totalWeightrecipe += quantity;
+				}
+				this.fetchNutriFacts(barcode,quantity,nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
 			}
 		}
 		// For var key in data  
@@ -46,7 +87,7 @@ class NutriFacts extends Component {
 		// for chaque ingredient dans array, take barcode in fetch api IF BARCODE PRESENT
 		// extract and store result nutriments.
 		// règle de 3 pour mettre par 100G avec quantity existante
-	}
+	};
 
 	render () {
 		return (
@@ -54,26 +95,24 @@ class NutriFacts extends Component {
 				<section className="performance-facts">
 					<header className="performance-facts__header">
 						<h1 className="performance-facts__title">Nutrition Facts</h1>
-						<p>Serving Size 1/2 cup (about 82g)</p>
-						<p>Serving Per Container 8</p>
+						<p>Amount Per 100 gr</p>
 					</header>
 					<table className="performance-facts__table">
 						<thead>
 							<tr>
 								<th colSpan="3" className="small-info">
-									Amount Per Serving
+									
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<th colSpan="2">
-									<b>Calories</b>
-									200
+									<b>Calories {this.props.energyKCal} kcal</b>
+									
 								</th>
 								<td>
-									Calories from Fat
-									130
+									<b>{this.props.fat_percent} %</b>
 								</td>
 							</tr>
 							<tr className="thick-row">
@@ -83,180 +122,84 @@ class NutriFacts extends Component {
 							</tr>
 							<tr>
 								<th colSpan="2">
-									<b>Total Fat</b>
-									14g
+									<b>Total Fat {this.props.fat} g</b>
+									
 								</th>
 								<td>
-									<b>22%</b>
+									<b>{this.props.fat_percent} %</b>
 								</td>
 							</tr>
 							<tr>
 								<td className="blank-cell">
 								</td>
 								<th>
-									Saturated Fat
-									9g
+									Saturated Fat {this.props.saturatedFat} g
+									
 								</th>
 								<td>
-									<b>22%</b>
+									<b>{this.props.saturatedFat_percent} %</b>
 								</td>
 							</tr>
 							<tr>
 								<td className="blank-cell">
 								</td>
-								<th>
-									Trans Fat
-									0g
-								</th>
 								<td>
 								</td>
 							</tr>
 							<tr>
 								<th colSpan="2">
-									<b>Cholesterol</b>
-									55mg
+									<b>Sodium {this.props.sodium} g</b>
+									
 								</th>
 								<td>
-									<b>18%</b>
+									<b>{this.props.sodium_percent} %</b>
 								</td>
 							</tr>
 							<tr>
 								<th colSpan="2">
-									<b>Sodium</b>
-									40mg
+									<b>Total Carbohydrate {this.props.carbohydrates} g</b>
+									
 								</th>
 								<td>
-									<b>2%</b>
-								</td>
-							</tr>
-							<tr>
-								<th colSpan="2">
-									<b>Total Carbohydrate</b>
-									17g
-								</th>
-								<td>
-									<b>6%</b>
+									<b>{this.props.carbohydrates_percent} %</b>
 								</td>
 							</tr>
 							<tr>
 								<td className="blank-cell">
 								</td>
 								<th>
-									Dietary Fiber
-									1g
+									Dietary Fiber {this.props.fiber} g
+									
 								</th>
 								<td>
-									<b>4%</b>
+									<b>{this.props.fiber_percent} %</b>
 								</td>
 							</tr>
 							<tr>
 								<td className="blank-cell">
 								</td>
 								<th>
-									Sugars
-									14g
+									Sugars {this.props.sugars} g
+									
 								</th>
-								<td>
+								<td className="blank-cell">
+									<b>{this.props.sugars_percent} %</b>
 								</td>
 							</tr>
 							<tr className="thick-end">
 								<th colSpan="2">
-									<b>Protein</b>
-									3g
+									<b>Protein {this.props.proteins} g</b>
+									
 								</th>
 								<td>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<table className="performance-facts__table--grid">
-						<tbody>
-							<tr>
-								<td colSpan="2">
-									Vitamin A
-									10%
-								</td>
-								<td>
-									Vitamin C
-									0%
-								</td>
-							</tr>
-							<tr className="thin-end">
-								<td colSpan="2">
-									Calcium
-									10%
-								</td>
-								<td>
-									Iron
-									6%
+									<b>{this.props.proteins_percent} %</b>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 
 					<p className="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
-
-					{/* <table className="performance-facts__table--small small-info">
-						<thead>
-							<tr>
-								<td colSpan="2"></td>
-								<th>Calories:</th>
-								<th>2,000</th>
-								<th>2,500</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th colSpan="2">Total Fat</th>
-								<td>Less than</td>
-								<td>65g</td>
-								<td>80g</td>
-							</tr>
-							<tr>
-								<td className="blank-cell"></td>
-								<th>Saturated Fat</th>
-								<td>Less than</td>
-								<td>20g</td>
-								<td>25g</td>
-							</tr>
-							<tr>
-								<th colSpan="2">Cholesterol</th>
-								<td>Less than</td>
-								<td>300mg</td>
-								<td>300 mg</td>
-							</tr>
-							<tr>
-								<th colSpan="2">Sodium</th>
-								<td>Less than</td>
-								<td>2,400mg</td>
-								<td>2,400mg</td>
-							</tr>
-							<tr>
-								<th colSpan="3">Total Carbohydrate</th>
-								<td>300g</td>
-								<td>375g</td>
-							</tr>
-							<tr>
-								<td className="blank-cell"></td>
-								<th colSpan="2">Dietary Fiber</th>
-								<td>25g</td>
-								<td>30g</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<p className="small-info">
-						Calories per gram:
-					</p>
-					<p className="small-info text-center">
-						Fat 9
-						&bull;
-						Carbohydrate 4
-						&bull;
-						Protein 4
-					</p> */}
-
+					<p className="small-info">Tool provided by <b>OpenFoodFacts.org</b></p>
 				</section>
 			</div>
 		);

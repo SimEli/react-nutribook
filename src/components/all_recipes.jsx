@@ -9,11 +9,11 @@ class AllRecipes extends Component {
 		this.state = {
 			recipes: this.storageRecipes,
 			selectedRecipe: this.storageRecipes[0],
-      show: false
-		};
+      show: false,
+    };
 	}
 
-	showSelectedRecipe = (index) => {
+  	showSelectedRecipe = (index) => {
     this.setState({
       selectedRecipe: this.storageRecipes[index]
     });

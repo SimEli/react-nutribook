@@ -24,7 +24,7 @@ const UploadPicture = (props) => {
 	
 		return (
 			<div>
-				<div>
+				<div className="input_file">
 					<input
 						className="form-control-file"
 						accept="image/*"
@@ -32,9 +32,9 @@ const UploadPicture = (props) => {
 						name="recipeUrlImage"
 						onChange={(e) => setImage(e.target.files[0])}>
 					</input>
-					<Button onClick={uploadImage}>Upload</Button>
+					<Button onClick={uploadImage}>Upload the picture</Button>
 				</div>
-				<div>
+				<div className="uploaded_file">
 					<img src={props.recipeUrlImage} alt="uploaded illustration of the recipe" />
 				</div>
 			</div>

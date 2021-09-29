@@ -50,6 +50,7 @@ class AddRecipeForm extends Component{
 		//	const ingredientName = splittedLines[i].slice(3); //?not useful right now to have full ingredient name in this ingredient object
 			const formattedIngredient = new Ingredient(barcode, quantity, ingredientName);
 			ingredientsArray.push(formattedIngredient);
+			console.log(ingredientsArray);
 		}
 		return ingredientsArray;
 	}
@@ -67,12 +68,8 @@ class AddRecipeForm extends Component{
 
   handleSubmit = (event) => {
 		if (event.target[0].value === "") {
-		// 	return(<Alert variant="success">
-		// 	<Alert.Heading>Hey, nice to see you</Alert.Heading>
-		// 	<p></p>
-		// 	<hr />
-		// 	<p className="mb-0"></p>
-		// </Alert>)
+			// event.stopPropagation();
+			// alert('you need a name for your recipe');
 		} else {
 			this.addNewRecipeToStorage(event);
 		}
@@ -83,7 +80,7 @@ class AddRecipeForm extends Component{
 			<div className="container">
 				<h2>Add your recipe</h2>
 				<form onSubmit={this.handleSubmit}>
-					<div className="form-group">
+					<div className="form-group recipe_name">
 						<label>Recipe Name</label>
 							<input
 								className="form-control"
@@ -94,7 +91,18 @@ class AddRecipeForm extends Component{
 								placeholder="Enter the name of your recipe"
 							/>
 					</div>
-					<div className="form-group">
+					<div className="form-group ingredients">
+						<label>Recipe Ingredients</label>
+							<textarea
+								rows="6"
+								className="form-control"
+								name="recipeIngredients"
+								value={this.state.recipeIngredients}
+								onChange={this.handleChange}
+								placeholder={'Please enter barcode, quantity in grams, name of ingredient.\nOne ingredient by line\n3045320104127 250 gr farfalle\n5256879809864 350 gr tomato sauce'}
+							/>
+					</div>
+					<div className="form-group steps">
 						<label>Recipe Steps</label>
 							<textarea
 								rows="6"
@@ -105,27 +113,14 @@ class AddRecipeForm extends Component{
 								placeholder="Enter the steps of your recipe"
 							/>
 					</div>
-					<div className="form-group">
-						<label>Recipe Ingredients</label>
-							<textarea
-								rows="6"
-								className="form-control"
-								name="recipeIngredients"
-								value={this.state.recipeIngredients}
-								onChange={this.handleChange}
-								placeholder={'Please enter barcode then quantity in grams then name of ingredient.\nOne ingredient by line\n3045320104127 250 gr farfalle\n5256879809864 350 gr tomato sauce'}
-							/>
-					</div>
-					<div className="form-group">
+					<div className="form-group image">
 						<label>Add a picture of the recipe</label>
 							<UploadPicture
 								recipeUrlImage={this.state.recipeUrlImage}
 								setImageUrl={this.setImageUrl}
 								 /> 
 					</div>
-						
-							<button type="submit" className="btn btn-primary btn-block" value="">Add</button>
-						
+							<button type="submit" className="btn btn-primary btn-block save_btn" value="">Save Your Recipe !</button>
 				</form>
 			</div>
     );

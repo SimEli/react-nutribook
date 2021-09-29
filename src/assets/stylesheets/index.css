@@ -227,3 +227,66 @@ ul li:first-child{
   right: 2%;
   height: 92%;
 }
+
+.form-group {
+  display: inline-block;
+  width: 65%;
+  margin-left: 2.5%;
+}
+
+.form-group.recipe_name{
+  display: block;
+  width: 25%;
+  margin-top: 1.5%;
+}
+.form-group.ingredients{
+  width: 25%;
+  margin-right: 5%;
+  
+}
+
+.form-group.steps{
+  margin-left: unset;
+  height: 38%;
+  position: absolute;
+  top: 7.5%;
+  right: 3.5%;
+}
+
+.form-group.steps textarea{
+  height: 88%;
+}
+
+.form-group.image{
+  width: 95%;
+}
+
+.save_btn{
+  width: 20%;
+  position: absolute;
+  bottom: 10%;
+  left: 12%;
+}
+
+.input_file,
+.uploaded_file{
+  display: inline-block;
+}
+
+.input_file{
+  width: 45%;
+  display: inline-block;
+  margin-right: 5%;
+}
+
+.input_file button{
+  margin-top : 2%;
+}
+
+.uploaded_file{
+  width: 50%;
+}
+
+.uploaded_file img{
+  width: 100%;
+}
