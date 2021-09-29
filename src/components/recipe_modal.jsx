@@ -28,7 +28,8 @@ class RecipeModal extends Component {
 					<div className="image-box">
 						<div className="card_recipe_img" style={{backgroundImage:`url('${this.props.selected.recipeUrlImage}')`}}></div>
 					</div>
-					<NutriFacts />
+					<NutriFacts
+						selectedRecipe={this.props.selected} />
 				</Modal.Body>
 			</Modal>
 		);

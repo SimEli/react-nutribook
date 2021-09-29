@@ -17,7 +17,7 @@ class AllRecipes extends Component {
     this.setState({
       selectedRecipe: this.storageRecipes[index]
     });
-    console.log(this.storageRecipes[index]);
+    // console.log(this.storageRecipes[index]);
   }
 
   openModal = () => {
@@ -37,17 +37,11 @@ class AllRecipes extends Component {
   closeModal = () => {
     this.setState({ show: false });
   };
-  // componentDidMount(){
-  //   alert('mounted');
-  //   this.userRecipes = JSON.parse(localStorage.recipes);
 
-  //   this.setState({
-  //     recipes: this.userRecipes
-  //   })
-  // }
   render() {
     return (
       <div className="container">
+        <h2>All your recipes</h2>
         <RecipesList
           recipes={this.state.recipes}
           selectedRecipe={this.state.selectedRecipe} //! check if needed active selected
@@ -57,13 +51,7 @@ class AllRecipes extends Component {
           closeModal={this.closeModal}
           deleteRecipe={this.deleteRecipe}
           show={this.state.show}
-
         />
-        {/* <RecipeModal 
-          show={this.state.show}
-          showSelectedRecipe={this.showSelectedRecipe} 
-          closeModal={this.closeModal}
-        /> */}
       </div>  
     );
   }

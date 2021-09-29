@@ -3,20 +3,54 @@ import React, { Component } from 'react';
 
 class NutriFacts extends Component {
 	
-	fetchNutriFacts = () => {
-		fetch("  https://be-fr.openfoodfacts.org/api/v0/product/3045320104127.json?fields=nutriments", {
+	fetchNutriFacts = (barcode,nutrimentsOfAllIngredients,quantity) => {
+		fetch(`https://be-fr.openfoodfacts.org/api/v0/product/${barcode}.json?fields=nutriments`, {
 			method: "get"
 		})
 			.then(resp => resp.json())
 			.then(data => {
-			console.log(data)
-			})
-			.catch(err => console.log(err))
+			let nutriments = data.product.nutriments;
+			console.log(nutriments);
+			for (let key in nutriments) {
+				nutriments[key]=(nutriments[key]/100)*quantity; //! not sure ...
+			}
+			// /100 * quantity
+			// nutrimentsOfAllIngredients.push(nutriments);
+			// console.log(nutrimentsOfAllIngredients);
+			nutrimentsOfAllIngredients.push(nutriments);
+		})
+		.catch(err => console.log(err))
+		return nutrimentsOfAllIngredients;
+
 	}
  
+	componentDidMount(){
+		const currentRecipe = this.props.selectedRecipe.ingredientsArray;// recuperer storage parse
+		// console.log(currentRecipe);
+		const nutrimentsOfAllIngredients=[];
+
+		debugger
+		for (let i = 0; i < currentRecipe.length; i++) {
+			let barcode = currentRecipe[i].barcode;
+			if (barcode.length === 13 && !isNaN(barcode)) { //!only take ingredients with barcode. No barcode = no nutrifacts -_-
+				barcode = parseInt(barcode);
+				const quantity = currentRecipe[i].quantity;
+				this.fetchNutriFacts(barcode,nutrimentsOfAllIngredients,quantity)
+				console.log(nutrimentsOfAllIngredients);
+				console.log(quantity);
+			}
+		}
+		// For var key in data  
+		// Divide by 100 for 1g, then * quantity. 
+		// Push it in array contains all correct data by correct quantity. Then iterate inside to paint at right place. 
+		// for chaque ingredient dans array, take barcode in fetch api IF BARCODE PRESENT
+		// extract and store result nutriments.
+		// règle de 3 pour mettre par 100G avec quantity existante
+	}
+
 	render () {
 		return (
-			<div className="nutrifacts-box" onClick={this.fetchNutriFacts}>
+			<div className="nutrifacts-box">
 				<section className="performance-facts">
 					<header className="performance-facts__header">
 						<h1 className="performance-facts__title">Nutrition Facts</h1>
