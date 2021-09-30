@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class NutriFacts extends Component {
 
 	sumUpNutriments = (nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
@@ -14,8 +13,6 @@ class NutriFacts extends Component {
 				}
 			}
 		});
-
-		// console.log('total',total);
 		//calculate for all nutriments needed divided by total weight recipe * 100g too render nutrifacts per 100gr of the recipe
 		for (let i=0; i < nutrimentsKeys.length; i++) { 
 			total[nutrimentsKeys[i]]=((+total[nutrimentsKeys[i]]/totalWeightrecipe)*100).toFixed(2);
@@ -23,8 +20,6 @@ class NutriFacts extends Component {
 		localStorage.setItem('totalNutri', JSON.stringify(total));
 
 		this.props.inputNutriFacts(nutrimentsKeys,total);
-		
-		// return total;
 	};
 	 
 	fetchNutriFacts = (barcode,quantity,nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
@@ -42,7 +37,6 @@ class NutriFacts extends Component {
 				}
 		 	}
 		  nutrimentsOfAllIngredients.push(nutriments);
-			console.log(nutriments);
 			this.sumUpNutriments(nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
 			})
 			.catch(err => console.log(err))
@@ -50,7 +44,7 @@ class NutriFacts extends Component {
 
 	componentDidMount(){
 		const currentRecipe = this.props.selectedRecipe.ingredientsArray;
-		console.log(currentRecipe);
+		// console.log(currentRecipe);
 		let totalWeightrecipe = 0;
 		var nutrimentsOfAllIngredients = [];
 		var nutrimentsKeys = ["carbohydrates","energy-kcal","fat","proteins","sodium","saturated-fat","sugars","fiber"];
@@ -65,12 +59,6 @@ class NutriFacts extends Component {
 				this.fetchNutriFacts(barcode,quantity,nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
 			}
 		}
-		// For var key in data  
-		// Divide by 100 for 1g, then * quantity. 
-		// Push it in array contains all correct data by correct quantity. Then iterate inside to paint at right place. 
-		// for chaque ingredient dans array, take barcode in fetch api IF BARCODE PRESENT
-		// extract and store result nutriments.
-		// règle de 3 pour mettre par 100G avec quantity existante
 	};
 
 	render () {
@@ -93,7 +81,7 @@ class NutriFacts extends Component {
 							<tr>
 								<th colSpan="2">
 									<b>Calories {this.props.energyKcal} kcal</b>
-									
+
 								</th>
 								<td>
 									<b>{this.props.energyKcal_percent} %</b>
@@ -183,7 +171,7 @@ class NutriFacts extends Component {
 					</table>
 
 					<p className="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
-					
+{/* 					
 					<table className="performance-facts__table--small small-info">
 						<thead>
 							<tr>
@@ -233,7 +221,7 @@ class NutriFacts extends Component {
 								<td>30g</td>
 							</tr>
 						</tbody>
-					</table>
+					</table> */}
 
 
 					<p className="small-info">Tool provided by <b>OpenFoodFacts.org</b></p>

@@ -6,7 +6,7 @@ class AllRecipes extends Component {
     super(props);
     this.storageRecipes = JSON.parse(localStorage.recipes);
 
-		this.state = {
+		this.state = { //!not beautiful at all
 			recipes: this.storageRecipes,
 			selectedRecipe: this.storageRecipes[0],
       show: false,
@@ -33,7 +33,6 @@ class AllRecipes extends Component {
     this.setState({
       selectedRecipe: this.storageRecipes[index]
     });
-    // console.log(this.storageRecipes[index]);
   }
 
   openModal = () => {
@@ -58,9 +57,8 @@ class AllRecipes extends Component {
 	inputNutriFacts = (nutrimentsKeys) => {
     let total = JSON.parse(localStorage.getItem('totalNutri'));
 		// for (let i = 0; i < nutrimentsKeys.length; i++) {
-			console.log('X',total['carbohydrates']);
 		this.setState({
-			// nutrimentsKeys[i]: total[nutrimentsKeys[i]]
+			// nutrimentsKeys[i]: total[nutrimentsKeys[i]] //! set variable dynamically don't seems to work
 			carbohydrates: total['carbohydrates'],
 			carbohydrates_percent: ((+total['carbohydrates']/270)*100).toFixed(1),
 			energyKcal: total['energy-kcal'],
@@ -87,7 +85,7 @@ class AllRecipes extends Component {
         <h2>All your recipes</h2>
         <RecipesList
           recipes={this.state.recipes}
-          selectedRecipe={this.state.selectedRecipe} //! check if needed active selected
+          selectedRecipe={this.state.selectedRecipe} //! need to find a way for DRY these variable, like Redux
           // selectRecipe={this.selectRecipe} 
           showSelectedRecipe={this.showSelectedRecipe} 
           openModal={this.openModal}

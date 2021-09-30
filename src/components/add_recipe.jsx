@@ -42,19 +42,18 @@ class AddRecipeForm extends Component{
 		for (let i = 0; i < splittedLines.length; i++) {
 			const barcode = splittedLines[i][0];
 			let quantity = splittedLines[i][1];
-			// if (splittedLines[i][2] == 'gr') { //no need now because only grams supported
+			// if (splittedLines[i][2] == 'gr') { //!no need now because only grams supported
 			// 	quantity += splittedLines[i][2]
 			// }
 			const ingredientName = splittedLines[i][3];
 		//	const ingredientName = splittedLines[i].slice(3); //?not useful right now to have full ingredient name in this ingredient object
 			const formattedIngredient = new Ingredient(barcode, quantity, ingredientName);
 			ingredientsArray.push(formattedIngredient);
-			console.log(ingredientsArray);
 		}
 		return ingredientsArray;
 	}
 
-	addNewRecipeToStorage = (event) => {//! make recipeIngredients without barcode to display in details
+	addNewRecipeToStorage = (event) => {//! make recipeIngredients without barcode to display only ingredients and quantity in recipe details
 		const { recipeName, recipeSteps, recipeUrlImage, recipeIngredients } = this.state;
 		event.preventDefault(); //! ADD VALIDATION to form on NAME 
 		const ingredientsArray = this.restructureRecipeIngredients(recipeIngredients);//TODO keep 'recipeIngredients to paint as it is in modal ?
@@ -67,8 +66,8 @@ class AddRecipeForm extends Component{
 
   handleSubmit = (event) => {
 		if (event.target[0].value === "") {
-			// event.stopPropagation();
-			// alert('you need a name for your recipe');
+			alert('you need a name for your recipe');//!also check to have at least one barcode for new recipe, if it does not now it'll crash..
+			event.stopPropagation();
 		} else {
 			this.addNewRecipeToStorage(event);
 		}

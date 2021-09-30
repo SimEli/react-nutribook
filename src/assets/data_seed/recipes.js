@@ -1,15 +1,60 @@
 const recipes = [
 	{
-	  recipeName: "Chicken Tikka Massala",
-	  recipeSteps: "",
-	  recipeUrlImage: "https://res.cloudinary.com/mealzzap/image/upload/v1632921856/bbxrldefcmhldgp4jvzt.jpg",
-	  recipeIngredients: "2227171007616 400 gr blac poulet\n4002359654688 20 gr crème coco\n3270190180982 400 gr tomates concassées\n5201054016060 20 gr yaourt grec",
+	  recipeName: "Poulet tikka masala",
+	  recipeSteps: "Pour commencer, coupez les filets de poulet en lanières. Pressez les 2 citrons verts et râpez-en le zeste. Hachez 3 gousses d’ail finement et coupez les oignons en rondelles. Pelez et râpez un morceau de gingembre d’environ 2 cm. Hachez finement les piments, retirez les graines si vous souhaitez une préparation moins épicée.\n\nDans un grand récipient, enrobez le poulet d’un mélange de garam masala, pâte de curry, pâte tandoori, curcuma et yaourt. Ajoutez le jus et le zeste de citron vert. Mélangez à nouveau et laissez reposer au réfrigérateur 1 h. Dans une poêle, faites griller à sec les graines de fenouil et de coriandre. Versez 2 c à s d'huile et ajoutez les piments, l'ail, l'oignon rouge et le gingembre râpé. Laissez mijoter quelques minutes en mélangeant. Réservez.\n\nSortez le poulet de la marinade. Faites-le sauter à feu vif dans 2 c à s d’huile. Ajoutez les dés de tomate et le mélange de graines, d’ail et d'oignon rouge. Remuez, ajoutez le lait de coco et laissez mijoter 20 min en mélangeant régulièrement jusqu’à l’obtention d’une sauce onctueuse.\n\nPréparez l’accompagnement : faites cuire le riz basmati selon les indications de l’emballage. Dans une poêle, faites griller à sec les graines de cumin, fenouil et coriandre puis mélangez- les au riz cuit et au cumin. Répartissez le riz dans les assiettes et parsemez-le de zeste de citron vert. Dressez le poulet tikka masala et parsemez généreusement de coriandre fraîche.",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1633011433/wh9vrarxkk6kjm6qznlw.jpg",
+	  recipeIngredients: "2227171007616 600 gr blanc poulet\n4002359654688 400 gr lait coco\n3270190180982 400 gr tomates concassées\n5201054016060 100 gr yaourt grec\n30 gr garam masala\n15 gr red curry\n10 gr sauce tandoori\n15 gr curcuma\n7 gr graines cumin\n3560070837984 200 gr riz basmati",
 		ingredientsArray: [
-			{"barcode": "2227171007616", "quantity": "400 gr", "ingredientName": "blanc poulet"},
-			{"barcode": "4002359654688", "quantity": "20 gr", "ingredientName": "crème coco"},
-			{"barcode": "3270190180982", "quantity": "400 gr", "ingredientName": "tomates concassées"}, 
-			{"barcode": "5201054016060", "quantity": "20 gr", "ingredientName": "yaourt grec"}
-		]
+			{
+					"barcode": "2227171007616",
+					"quantity": "600",
+					"ingredientName": "blanc"
+			},
+			{
+					"barcode": "4002359654688",
+					"quantity": "400",
+					"ingredientName": "lait"
+			},
+			{
+					"barcode": "3270190180982",
+					"quantity": "400",
+					"ingredientName": "tomates"
+			},
+			{
+					"barcode": "5201054016060",
+					"quantity": "100",
+					"ingredientName": "yaourt"
+			},
+			{
+					"barcode": "30",
+					"quantity": "gr",
+					"ingredientName": "masala"
+			},
+			{
+					"barcode": "15",
+					"quantity": "gr",
+					"ingredientName": "curry"
+			},
+			{
+					"barcode": "10",
+					"quantity": "gr",
+					"ingredientName": "tandoori"
+			},
+			{
+					"barcode": "15",
+					"quantity": "gr"
+			},
+			{
+					"barcode": "7",
+					"quantity": "gr",
+					"ingredientName": "cumin"
+			},
+			{
+					"barcode": "3560070837984",
+					"quantity": "200",
+					"ingredientName": "riz"
+			}
+	]
 	},
 	{
 	  recipeName: "Fusilli aux courgettes, cresson et pesto de menthe",
