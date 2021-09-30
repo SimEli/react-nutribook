@@ -36,7 +36,7 @@ class NutriFacts extends Component {
 					nutriments[nutrimentsKeys[i]] = 0;
 				}
 		 	}
-		  nutrimentsOfAllIngredients.push(nutriments);
+		  nutrimentsOfAllIngredients.push(nutriments); //! need to add a thing to clean the nutriments object and only keep data needed !
 			this.sumUpNutriments(nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
 			})
 			.catch(err => console.log(err))
