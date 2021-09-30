@@ -6,8 +6,8 @@ class Home extends Component {
       <div className="container">
         <h2>Welcome to NutriBook !</h2>
         <br></br>
-          <p>Our NutriBook will store your favorite recipes with all the ingredients and steps.</p>
-          <p>When your recipes are added, you can even view their nutrifacts !</p>
+          <p className="home">Our NutriBook will store your favorite recipes with all the ingredients and steps.</p>
+          <p className="home">When your recipes are added, you can even view their nutrifacts !</p>
       </div>
     );
   }

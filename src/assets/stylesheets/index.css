@@ -12,7 +12,7 @@ body {
 }
 
 .container{
-  max-width: unset;
+  max-width: 98vw;
 }
 ul.header{
   display: flex;
@@ -61,9 +61,14 @@ ul li:first-child{
   background: linear-gradient(to bottom, #99f2c8, #38817A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .content h2 {
-  padding: 0;
+  padding: 1vw 2vw;
   margin: 0;
 }
+
+.content p.home{
+  padding: 0.5vw 2vw;
+}
+
 .content li {
   margin-bottom: 10px;
 }
@@ -71,6 +76,7 @@ ul li:first-child{
 /*  recipes cards css*/
 .recipes_list {
   margin: 1vw;
+  margin-top: unset;
   width: 100%;
   height: 100%;
   display: flex;
@@ -107,6 +113,9 @@ ul li:first-child{
   line-height: 4vw;
   justify-content: space-between;
   align-items: flex-end;
+  white-space  : nowrap;
+  overflow     : hidden;
+  text-overflow: ellipsis;
 }
 
 .delete_recipe{
@@ -171,7 +180,7 @@ ul li:first-child{
 }
 
 .modal-content {
-  height: 50vw;
+  height: 45vw;
 }
 
 .details-box{
@@ -223,9 +232,10 @@ ul li:first-child{
 
 .nutrifacts-box{
   position: absolute;
-  top: 4%;
-  right: 2%;
-  height: 92%;
+  top: 1%;
+  bottom: 1%;
+  right: 0vw;
+  width: 22vw;
 }
 
 .form-group {

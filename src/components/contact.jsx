@@ -5,7 +5,7 @@ class Contact extends Component {
     return (
       <div className="container">
         <h2>Do you have questions ?</h2>
-        	<p>Feel free to contact me @ ...</p>
+        	<p className="home">Feel free to contact me @ <a href="simonelicaste@gmail.com">simonelicaste@gmail.com</a></p>
       </div>
     );
   }

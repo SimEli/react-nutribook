@@ -67,17 +67,10 @@ class NutriFacts extends Component {
 			<div className="nutrifacts-box">
 				<section className="performance-facts">
 					<header className="performance-facts__header" >
-						<h1 className="performance-facts__title">Nutrition Facts</h1>
+						<h4 className="performance-facts__title">Nutrition Facts</h4>
 						<p>Amount Per 100 gr</p>
 					</header>
 					<table className="performance-facts__table">
-						<thead>
-							<tr>
-								<th colSpan="3" className="small-info">
-									
-								</th>
-							</tr>
-						</thead>
 						<tbody>
 							<tr>
 								<th colSpan="2">
@@ -111,12 +104,6 @@ class NutriFacts extends Component {
 								</th>
 								<td>
 									<b>{this.props.saturatedFat_percent} %</b>
-								</td>
-							</tr>
-							<tr>
-								<td className="blank-cell">
-								</td>
-								<td>
 								</td>
 							</tr>
 							<tr>
@@ -171,8 +158,7 @@ class NutriFacts extends Component {
 						</tbody>
 					</table>
 
-					<p className="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
-{/* 					
+					<p className="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>					
 					<table className="performance-facts__table--small small-info">
 						<thead>
 							<tr>
@@ -222,9 +208,7 @@ class NutriFacts extends Component {
 								<td>30g</td>
 							</tr>
 						</tbody>
-					</table> */}
-
-
+					</table>
 					<p className="small-info">Tool provided by <b>OpenFoodFacts.org</b></p>
 				</section>
 			</div>
