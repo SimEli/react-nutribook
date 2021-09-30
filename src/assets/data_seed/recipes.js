@@ -197,7 +197,40 @@ const recipes = [
 					"ingredientName": "Sucre"
 			}
 		]
-	}
+	},
+	{
+	  recipeName: "Oreo milkshakes , donnez un goût unique à vos milkshakes!",
+	  recipeSteps: "Mélangez bien les brisures d’Oreo, la glace à la vanille, le lait et les bananes dans un blender.\n\nVersez le mélange dans un verre réfrigéré et parsemez de brisures d’Oreo et d’un peu de crème fouettée en finition.",
+	  recipeUrlImage: "http://res.cloudinary.com/mealzzap/image/upload/v1633007177/xtqicqnrccuslxyecvom.jpg",
+	  recipeIngredients: "175 gr Brisures d’Oreo sans crème\n250 gr boules glace vanille\n600 gr lait\n2 bananes\n100 gr crème fouettée",
+		ingredientsArray: [
+			{
+					"barcode": "7622300489427",
+					"quantity": "175",
+					"ingredientName": "d’Oreo"
+			},
+			{
+					"barcode": "8714100638729",
+					"quantity": "250",
+					"ingredientName": "glace"
+			},
+			{
+					"barcode": "3428272950057",
+					"quantity": "600"					,
+					"ingredientName": "lait"
+			},
+			{
+					"barcode": "2",
+					"quantity": "2",
+					"ingredientName": "bananes"
+			},
+			{
+					"barcode": "5400112123409",
+					"quantity": "100",
+					"ingredientName": "fouettée"
+			}
+	]
+	},
   ];
   
   export default recipes;

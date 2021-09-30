@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 
 class NutriFacts extends Component {
 
-
 	sumUpNutriments = (nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
 		const total = {};
 		nutrimentsOfAllIngredients.forEach(ingredient => { 
@@ -19,11 +18,11 @@ class NutriFacts extends Component {
 		// console.log('total',total);
 		//calculate for all nutriments needed divided by total weight recipe * 100g too render nutrifacts per 100gr of the recipe
 		for (let i=0; i < nutrimentsKeys.length; i++) { 
-			total[nutrimentsKeys[i]]=((total[nutrimentsKeys[i]]/totalWeightrecipe)*100).toFixed(2);
+			total[nutrimentsKeys[i]]=((+total[nutrimentsKeys[i]]/totalWeightrecipe)*100).toFixed(2);
 		}
 		localStorage.setItem('totalNutri', JSON.stringify(total));
 
-		// this.inputNutriFacts(nutrimentsKeys,total);
+		this.props.inputNutriFacts(nutrimentsKeys,total);
 		
 		// return total;
 	};
@@ -36,7 +35,11 @@ class NutriFacts extends Component {
 			.then(data => {
 			let nutriments = data.product.nutriments;
 			for (let i=0; i < nutrimentsKeys.length; i++) { 
-				nutriments[nutrimentsKeys[i]]=(nutriments[nutrimentsKeys[i]]/100)*quantity;
+				if (!isNaN(nutriments[nutrimentsKeys[i]])) {
+					nutriments[nutrimentsKeys[i]]=(nutriments[nutrimentsKeys[i]]/100)*quantity;
+				}else{
+					nutriments[nutrimentsKeys[i]] = 0;
+				}
 		 	}
 		  nutrimentsOfAllIngredients.push(nutriments);
 			console.log(nutriments);
@@ -44,6 +47,7 @@ class NutriFacts extends Component {
 			})
 			.catch(err => console.log(err))
 	};
+
 	componentDidMount(){
 		const currentRecipe = this.props.selectedRecipe.ingredientsArray;
 		console.log(currentRecipe);
@@ -69,10 +73,9 @@ class NutriFacts extends Component {
 		// règle de 3 pour mettre par 100G avec quantity existante
 	};
 
-
 	render () {
 		return (
-			<div className="nutrifacts-box" onClick={this.props.inputNutriFacts}>
+			<div className="nutrifacts-box">
 				<section className="performance-facts">
 					<header className="performance-facts__header" >
 						<h1 className="performance-facts__title">Nutrition Facts</h1>
@@ -93,7 +96,7 @@ class NutriFacts extends Component {
 									
 								</th>
 								<td>
-									<b>{this.props.fat_percent} %</b>
+									<b>{this.props.energyKcal_percent} %</b>
 								</td>
 							</tr>
 							<tr className="thick-row">
@@ -181,10 +184,10 @@ class NutriFacts extends Component {
 
 					<p className="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
 					
-					<table class="performance-facts__table--small small-info">
+					<table className="performance-facts__table--small small-info">
 						<thead>
 							<tr>
-								<td colspan="2"></td>
+								<td colSpan="2"></td>
 								<th>Calories:</th>
 								<th>2,000</th>
 								<th>2,500</th>
@@ -192,39 +195,39 @@ class NutriFacts extends Component {
 						</thead>
 						<tbody>
 							<tr>
-								<th colspan="2">Total Fat</th>
+								<th colSpan="2">Total Fat</th>
 								<td>Less than</td>
 								<td>65g</td>
 								<td>80g</td>
 							</tr>
 							<tr>
-								<td class="blank-cell"></td>
+								<td className="blank-cell"></td>
 								<th>Saturated Fat</th>
 								<td>Less than</td>
 								<td>20g</td>
 								<td>25g</td>
 							</tr>
 							<tr>
-								<th colspan="2">Sodium</th>
+								<th colSpan="2">Sodium</th>
 								<td>Less than</td>
 								<td>2,400mg</td>
 								<td>2,400mg</td>
 							</tr>
 							<tr>
-								<th colspan="3">Total Carbohydrate</th>
+								<th colSpan="3">Total Carbohydrate</th>
 								<td>300g</td>
 								<td>375g</td>
 							</tr>
 							<tr>
-								<td class="blank-cell"></td>
-								<th colspan="2">Sugars</th>
+								<td className="blank-cell"></td>
+								<th colSpan="2">Sugars</th>
 								<td>Less than</td>
 								<td>90g</td>
 								<td>105g</td>
 							</tr>
 							<tr>
-								<td class="blank-cell"></td>
-								<th colspan="2">Dietary Fiber</th>
+								<td className="blank-cell"></td>
+								<th colSpan="2">Dietary Fiber</th>
 								<td>More than</td>
 								<td>25g</td>
 								<td>30g</td>

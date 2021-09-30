@@ -13,6 +13,7 @@ class AllRecipes extends Component {
       carbohydrates: 0,
 			carbohydrates_percent: 0,
 			energyKcal: 0,
+      energyKcal_percent: 0,
 			fat: 0,
 			fat_percent: 0,
 			proteins: 0,
@@ -61,20 +62,21 @@ class AllRecipes extends Component {
 		this.setState({
 			// nutrimentsKeys[i]: total[nutrimentsKeys[i]]
 			carbohydrates: total['carbohydrates'],
-			carbohydrates_percent: 0,
+			carbohydrates_percent: ((+total['carbohydrates']/270)*100).toFixed(1),
 			energyKcal: total['energy-kcal'],
+      energyKcal_percent:((+total['energy-kcal']/2000)*100).toFixed(1),
 			fat: total['fat'],
-			fat_percent: 0,
+			fat_percent: ((+total['fat']/70)*100).toFixed(1),
 			proteins: total['proteins'],
-			proteins_percent: 1,
+			proteins_percent: ((+total['proteins']/50)*100).toFixed(1),
 			sodium: total['sodium'],
-			sodium_percent: 0,
+			sodium_percent:((+total['sodium']/2.4)*100).toFixed(1),
 			saturatedFat: total['saturated-fat'],
-			saturatedFat_percent: 14,
+			saturatedFat_percent: ((+total['saturated-fat']/200)*100).toFixed(1),
 			sugars: total['sugars'],
-			sugars_percent: 0,
-			fiber: total['fibers'],
-			fiber_percent: 0
+			sugars_percent: ((+total['sugars']/900)*100).toFixed(1),
+			fiber: total['fiber'],
+			fiber_percent: ((+total['fiber']/25)*100).toFixed(1)
 		});
 		// }
 	}
@@ -95,6 +97,7 @@ class AllRecipes extends Component {
           carbohydrates={this.state.carbohydrates}
           carbohydrates_percent={this.state.carbohydrates_percent}
           energyKcal={this.state.energyKcal}
+          energyKcal_percent={this.state.energyKcal_percent}
           fat={this.state.fat}	
           fat_percent={this.state.fat_percent}
           proteins={this.state.proteins}

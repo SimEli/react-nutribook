@@ -2,22 +2,10 @@ import React, { Component } from 'react';
 import Modal from "react-bootstrap/Modal";
 import NutriFacts from "./recipe_nutrifacts";
 class RecipeModal extends Component {
-	// constructor(props){
-  //   super(props);
 
-	// 	this.state = {
-		
-	// 	};
-	// }
 	hideModal = () => {
 		this.props.closeModal();
 	}
-
-		refreshNutri = () => {
-		this.props.inputNutriFacts();
-	}
-
-	
 
 	render () {
 		return (
@@ -46,6 +34,7 @@ class RecipeModal extends Component {
 						carbohydrates={this.props.carbohydrates}
 						carbohydrates_percent={this.props.carbohydrates_percent}
 						energyKcal={this.props.energyKcal}
+						energyKcal_percent={this.props.energyKcal_percent}
 						fat={this.props.fat}	
 						fat_percent={this.props.fat_percent}
 						proteins={this.props.proteins}

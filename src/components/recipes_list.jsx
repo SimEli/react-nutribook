@@ -19,6 +19,7 @@ const RecipesList = (props) => {
 					carbohydrates={props.carbohydrates}
           carbohydrates_percent={props.carbohydrates_percent}
           energyKcal={props.energyKcal}
+					energyKcal_percent={props.energyKcal_percent}
           fat={props.fat}	
           fat_percent={props.fat_percent}
           proteins={props.proteins}
@@ -48,6 +49,7 @@ const RecipesList = (props) => {
 				carbohydrates={props.carbohydrates}
 				carbohydrates_percent={props.carbohydrates_percent}
 				energyKcal={props.energyKcal}
+				energyKcal_percent={props.energyKcal_percent}
 				fat={props.fat}	
 				fat_percent={props.fat_percent}
 				proteins={props.proteins}
