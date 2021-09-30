@@ -55,7 +55,8 @@ class NutriFacts extends Component {
 				const quantity = parseInt(currentRecipe[i].quantity);
 				if (!isNaN(quantity)){
 					totalWeightrecipe += quantity;
-				}
+				} 
+				//!need to add a check here: if nutrifacts already fetched for this recipe (saved in storage with Id) use it. so no need to make a call at every modal opening
 				this.fetchNutriFacts(barcode,quantity,nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
 			}
 		}
