@@ -33,8 +33,7 @@ class AddRecipeForm extends Component{
 			}
 		}
 		let splittedLines = [];
-		//recipeIngredients: "3125647896541 250 gr farfalle\n1231235647898 500 gr tomato sauce" 
-		let ingredientsByLine = allIngredients.split('\n'); //ARRAY ["3125647896541 250 gr farfalle","1231235647898 500 gr tomato sauce"]
+		let ingredientsByLine = allIngredients.split('\n');
 		let ingredientsArray=[];
 		for (let i = 0; i < ingredientsByLine.length; i++) {
 			const element = ingredientsByLine[i].split(' ');

@@ -10,6 +10,21 @@ class AllRecipes extends Component {
 			recipes: this.storageRecipes,
 			selectedRecipe: this.storageRecipes[0],
       show: false,
+      carbohydrates: 0,
+			carbohydrates_percent: 0,
+			energyKcal: 0,
+			fat: 0,
+			fat_percent: 0,
+			proteins: 0,
+			proteins_percent: 0,
+			sodium: 0,
+			sodium_percent: 0,
+			saturatedFat: 0,
+			saturatedFat_percent: 0,
+			sugars: 0,
+			sugars_percent: 0,
+			fiber: 0,
+			fiber_percent: 0
     };
 	}
 
@@ -38,6 +53,32 @@ class AllRecipes extends Component {
     this.setState({ show: false });
   };
 
+  
+	inputNutriFacts = (nutrimentsKeys) => {
+    let total = JSON.parse(localStorage.getItem('totalNutri'));
+		// for (let i = 0; i < nutrimentsKeys.length; i++) {
+			console.log('X',total['carbohydrates']);
+		this.setState({
+			// nutrimentsKeys[i]: total[nutrimentsKeys[i]]
+			carbohydrates: total['carbohydrates'],
+			carbohydrates_percent: 0,
+			energyKcal: total['energy-kcal'],
+			fat: total['fat'],
+			fat_percent: 0,
+			proteins: total['proteins'],
+			proteins_percent: 1,
+			sodium: total['sodium'],
+			sodium_percent: 0,
+			saturatedFat: total['saturated-fat'],
+			saturatedFat_percent: 14,
+			sugars: total['sugars'],
+			sugars_percent: 0,
+			fiber: total['fibers'],
+			fiber_percent: 0
+		});
+		// }
+	}
+
   render() {
     return (
       <div className="container">
@@ -51,6 +92,22 @@ class AllRecipes extends Component {
           closeModal={this.closeModal}
           deleteRecipe={this.deleteRecipe}
           show={this.state.show}
+          carbohydrates={this.state.carbohydrates}
+          carbohydrates_percent={this.state.carbohydrates_percent}
+          energyKcal={this.state.energyKcal}
+          fat={this.state.fat}	
+          fat_percent={this.state.fat_percent}
+          proteins={this.state.proteins}
+          proteins_percent={this.state.proteins_percent}
+          sodium={this.state.sodium}
+          sodium_percent={this.state.sodium_percent}
+          saturatedFat={this.state.saturatedFat}
+          saturatedFat_percent={this.state.saturatedFat_percent}
+          sugars={this.state.sugars}
+          sugars_percent={this.state.sugars_percent}
+          fiber={this.state.fiber}
+          fiber_percent={this.state.fiber_percent}
+          inputNutriFacts={this.inputNutriFacts}
         />
       </div>  
     );

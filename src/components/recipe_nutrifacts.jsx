@@ -3,29 +3,6 @@ import React, { Component } from 'react';
 
 class NutriFacts extends Component {
 
-	inputNutriFacts = (nutrimentsKeys,total) => {
-		// for (let i = 0; i < nutrimentsKeys.length; i++) {
-			console.log('X',total['carbohydrates']);
-		this.setState({
-			// nutrimentsKeys[i]: total[nutrimentsKeys[i]]
-			carbohydrates: 2,
-			carbohydrates_percent: 0,
-			energyKcal: 0,
-			fat: 0,
-			fat_percent: 0,
-			proteins: 2,
-			proteins_percent: 0,
-			sodium: 0,
-			sodium_percent: 0,
-			saturatedFat: 0,
-			saturatedFat_percent: 0,
-			sugars: 0,
-			sugars_percent: 0,
-			fiber: 0,
-			fiber_percent: 0
-		});
-		// }
-	}
 
 	sumUpNutriments = (nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
 		const total = {};
@@ -39,14 +16,16 @@ class NutriFacts extends Component {
 			}
 		});
 
-		console.log('total',total);
+		// console.log('total',total);
 		//calculate for all nutriments needed divided by total weight recipe * 100g too render nutrifacts per 100gr of the recipe
 		for (let i=0; i < nutrimentsKeys.length; i++) { 
-			total[nutrimentsKeys[i]]=(total[nutrimentsKeys[i]]/totalWeightrecipe)*100;
+			total[nutrimentsKeys[i]]=((total[nutrimentsKeys[i]]/totalWeightrecipe)*100).toFixed(2);
 		}
-		this.inputNutriFacts(nutrimentsKeys,total);
+		localStorage.setItem('totalNutri', JSON.stringify(total));
+
+		// this.inputNutriFacts(nutrimentsKeys,total);
 		
-		return total;
+		// return total;
 	};
 	 
 	fetchNutriFacts = (barcode,quantity,nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe) => {
@@ -60,6 +39,7 @@ class NutriFacts extends Component {
 				nutriments[nutrimentsKeys[i]]=(nutriments[nutrimentsKeys[i]]/100)*quantity;
 		 	}
 		  nutrimentsOfAllIngredients.push(nutriments);
+			console.log(nutriments);
 			this.sumUpNutriments(nutrimentsKeys,nutrimentsOfAllIngredients,totalWeightrecipe);
 			})
 			.catch(err => console.log(err))
@@ -69,7 +49,7 @@ class NutriFacts extends Component {
 		console.log(currentRecipe);
 		let totalWeightrecipe = 0;
 		var nutrimentsOfAllIngredients = [];
-		var nutrimentsKeys = ["carbohydrates","energy","energy-kcal","fat","proteins","sodium","saturated-fat","sugars","fiber"];
+		var nutrimentsKeys = ["carbohydrates","energy-kcal","fat","proteins","sodium","saturated-fat","sugars","fiber"];
 		for (let i = 0; i < currentRecipe.length; i++) {
 			let barcode = currentRecipe[i].barcode;
 			if (barcode.length === 13 && !isNaN(barcode)) { //!only take ingredients with barcode. No barcode = no nutrifacts -_-
@@ -89,11 +69,12 @@ class NutriFacts extends Component {
 		// règle de 3 pour mettre par 100G avec quantity existante
 	};
 
+
 	render () {
 		return (
-			<div className="nutrifacts-box">
+			<div className="nutrifacts-box" onClick={this.props.inputNutriFacts}>
 				<section className="performance-facts">
-					<header className="performance-facts__header">
+					<header className="performance-facts__header" >
 						<h1 className="performance-facts__title">Nutrition Facts</h1>
 						<p>Amount Per 100 gr</p>
 					</header>
@@ -108,7 +89,7 @@ class NutriFacts extends Component {
 						<tbody>
 							<tr>
 								<th colSpan="2">
-									<b>Calories {this.props.energyKCal} kcal</b>
+									<b>Calories {this.props.energyKcal} kcal</b>
 									
 								</th>
 								<td>
@@ -199,6 +180,59 @@ class NutriFacts extends Component {
 					</table>
 
 					<p className="small-info">* Percent Daily Values are based on a 2,000 calorie diet. Your daily values may be higher or lower depending on your calorie needs:</p>
+					
+					<table class="performance-facts__table--small small-info">
+						<thead>
+							<tr>
+								<td colspan="2"></td>
+								<th>Calories:</th>
+								<th>2,000</th>
+								<th>2,500</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th colspan="2">Total Fat</th>
+								<td>Less than</td>
+								<td>65g</td>
+								<td>80g</td>
+							</tr>
+							<tr>
+								<td class="blank-cell"></td>
+								<th>Saturated Fat</th>
+								<td>Less than</td>
+								<td>20g</td>
+								<td>25g</td>
+							</tr>
+							<tr>
+								<th colspan="2">Sodium</th>
+								<td>Less than</td>
+								<td>2,400mg</td>
+								<td>2,400mg</td>
+							</tr>
+							<tr>
+								<th colspan="3">Total Carbohydrate</th>
+								<td>300g</td>
+								<td>375g</td>
+							</tr>
+							<tr>
+								<td class="blank-cell"></td>
+								<th colspan="2">Sugars</th>
+								<td>Less than</td>
+								<td>90g</td>
+								<td>105g</td>
+							</tr>
+							<tr>
+								<td class="blank-cell"></td>
+								<th colspan="2">Dietary Fiber</th>
+								<td>More than</td>
+								<td>25g</td>
+								<td>30g</td>
+							</tr>
+						</tbody>
+					</table>
+
+
 					<p className="small-info">Tool provided by <b>OpenFoodFacts.org</b></p>
 				</section>
 			</div>

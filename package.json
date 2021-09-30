@@ -1,4 +1,5 @@
 {
+  "homepage": "https://simeli.github.io/react-nutribook/",
   "name": "react-nutribook",
   "version": "0.1.0",
   "private": true,
@@ -20,6 +21,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,7 +37,6 @@
   "browserslist": {
     "production": [
       ">0.2%",
-      "not dead",
       "not op_mini all"
     ],
     "development": [
@@ -44,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1"
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "gh-pages": "^3.2.3"
   }
 }
